@@ -1,51 +1,71 @@
-# Design Document — SortYourTrip / MakeYourTrip-JS
+# Design Document — MakeYourTrip-JS (SortYourTrip)
 
-## 1. Problem Statement
+## Overview
 
-The goal of this project is to design a production-like itinerary generation service that simulates AI reasoning using multiple agents. The system should support asynchronous execution, provide progress visibility, expose observability metrics, and remain extensible toward ML-backed inference — all within a Node.js + TypeScript ecosystem.
+This project implements a production-style itinerary generation microservice in **Node.js + TypeScript**, designed to simulate how an AI-driven system could be built and operated in a real-world backend environment.
 
-The focus is on **system design and orchestration**, not on integrating large external AI models.
+The primary goal of this implementation is **architectural and infrastructural clarity**, rather than maximizing model sophistication. The system emphasizes:
+- modular agent orchestration
+- asynchronous job processing
+- observability and telemetry
+- extensibility for future AI/ML integration
 
----
-
-## 2. High-Level Architecture
-
-The system is composed of four main layers:
-
-1. **API Layer** — Accepts user requests and exposes job status
-2. **Background Worker** — Executes itinerary generation asynchronously
-3. **Coordinator** — Orchestrates agent execution and dependencies
-4. **Agents** — Independent decision-making modules
-
-This separation ensures:
-- Loose coupling between components
-- Clear ownership of responsibilities
-- Replaceability of individual parts (e.g., agents, queue backend)
+The result is a working prototype that demonstrates how an AI system could be *mounted on top of robust backend infrastructure*.
 
 ---
 
-## 3. Agent-Based Reasoning Model
+## High-Level Architecture
 
-### 3.1 Why Agents?
+The service is composed of the following core layers:
 
-Instead of a monolithic decision engine, the system decomposes itinerary planning into specialized agents:
+1. **API Layer (Express)**
+   - Handles request validation and job submission
+   - Exposes job status, health checks, and metrics
+   - Designed to return immediately for long-running tasks
 
-- `destinationAgent`
-- `activityAgent`
-- `transportAgent`
+2. **Worker Layer**
+   - Processes itinerary generation asynchronously
+   - Emits granular progress updates
+   - Handles success, failure, and fallback scenarios
 
-Each agent:
-- Operates independently
-- Focuses on a single responsibility
-- Returns both a decision and an explanation
+3. **Coordinator**
+   - Orchestrates multiple independent agents
+   - Resolves dependencies (e.g., activities depend on destination)
+   - Aggregates agent outputs into a final itinerary
 
-This mirrors real-world AI systems where multiple subsystems contribute partial decisions that are later combined.
+4. **Agent Modules**
+   - `destinationAgent`
+   - `activityAgent`
+   - `transportAgent`
+   - Each agent follows a consistent interface and returns:
+     - choice
+     - confidence score
+     - reasoning text
+     - metadata
+
+5. **Observability**
+   - Structured logging
+   - Metrics for job throughput and latency
+   - Designed to integrate with Prometheus-style scraping
 
 ---
 
-### 3.2 Agent Interface
+## Agent Design
 
-All agents expose the same interface:
+Agents are implemented as **pure, composable modules** with no direct knowledge of:
+- HTTP
+- queues
+- storage
+- orchestration logic
+
+Each agent exposes:
 
 ```ts
-run(input, context): Promise<AgentResult>
+run(input, context) -> {
+  choice,
+  score,
+  reasoning,
+  metadata
+}
+
+
