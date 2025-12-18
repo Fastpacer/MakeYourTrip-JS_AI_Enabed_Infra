@@ -1,0 +1,123 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+coverage/
+reports/
+.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+# Optional: compiled JS if emitted next to TS sources
+**/*.js
+**/*.js.map
+
+# Environment
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Caches
+.cache/
+.parcel-cache/
+.eslintcache
+.next/
+.nuxt/
+.vite/
+.turbo/
+
+# Misc
+*.tgz
+*.bak
+*.tmp
+.node_repl_history
+coverage/
+debug/
+```// filepath: c:\Users\Hp\Desktop\makeyourtrip-js\.gitignore
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+coverage/
+reports/
+.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+# Optional: compiled JS if emitted next to TS sources
+**/*.js
+**/*.js.map
+
+# Environment
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Caches
+.cache/
+.parcel-cache/
+.eslintcache
+.next/
+.nuxt/
+.vite/
+.turbo/
+
+# Misc
+*.tgz
+*.bak
+*.tmp
+.node_repl_history
+coverage/
+debug/

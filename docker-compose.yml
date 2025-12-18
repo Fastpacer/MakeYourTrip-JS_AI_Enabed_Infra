@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: makeyourtrip-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      # Future switch:
+      # - QUEUE_MODE=memory | bullmq
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    container_name: makeyourtrip-redis
+    ports:
+      - "6379:6379"
