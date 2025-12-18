@@ -3,7 +3,7 @@
 ## Overview
 
 This project is a production-oriented itinerary generation microservice built with **Node.js and TypeScript**.  
-It demonstrates how AI-style reasoning systems can be structured using **modular agents**, asynchronous execution, and strong observability — without relying on external AI APIs.
+It demonstrates how AI-style reasoning systems can be structured using **modular agents**, asynchronous execution, and strong observability  without relying on external AI APIs.
 
 Instead of calling an LLM, the system **simulates AI reasoning** using deterministic and probabilistic logic.  
 The emphasis is on **architecture, orchestration, explainability, and reliability**, not model size.
